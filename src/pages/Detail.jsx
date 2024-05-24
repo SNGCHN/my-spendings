@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { useContext } from "react";
+import { SpendingContext } from "../context/SpendingContext";
 
-const Detail = ({ spending, setSpending, setSelectedMonth }) => {
+const Detail = () => {
+  const { spending, setSpending, setSelectedMonth } = useContext(SpendingContext);
+
   const navigate = useNavigate();
   const { detailId } = useParams();
   const selectedSpending = spending.find((item) => {
@@ -29,12 +33,12 @@ const Detail = ({ spending, setSpending, setSelectedMonth }) => {
 
   const handleEditValue = () => {
     const editItem = {
-      date: editDate,
+      id,
       cost: editCost,
-      detail: editDetail,
+      date: editDate,
       category: editCategory,
       month: Number(editDate.split("-")[1]),
-      id,
+      detail: editDetail,
     };
     setSpending((prev) => {
       return prev.map((item) => {

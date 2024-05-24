@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useContext } from "react";
+import { SpendingContext } from "../context/SpendingContext";
 
-const SpendingItem = ({ spending, selectedMonth }) => {
+const SpendingItem = () => {
+  const { spending, selectedMonth } = useContext(SpendingContext);
   const filteredSpend = spending.filter((item) => item.month === selectedMonth);
   return (
     <ListWrapper>

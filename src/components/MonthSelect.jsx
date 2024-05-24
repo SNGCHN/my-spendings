@@ -1,5 +1,32 @@
 import React from "react";
 import styled from "styled-components";
+import { useContext } from "react";
+import { SpendingContext } from "../context/SpendingContext";
+
+const MONTHS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+const MonthSelect = () => {
+  const { selectedMonth, setSelectedMonth } = useContext(SpendingContext);
+  const handleSetMonth = (month) => {
+    setSelectedMonth(month);
+  };
+
+  return (
+    <ButtonWrapper>
+      {MONTHS.map((month, index) => (
+        <MonthButton
+          $active={selectedMonth === month}
+          onClick={() => {
+            handleSetMonth(month);
+          }}
+          key={index}
+        >
+          {month}월
+        </MonthButton>
+      ))}
+    </ButtonWrapper>
+  );
+};
 
 const ButtonWrapper = styled.div`
   display: grid;
@@ -23,29 +50,5 @@ const MonthButton = styled.button`
     background-color: #f0f0f0;
   }
 `;
-
-const MONTHS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-
-const MonthSelect = ({ selectedMonth, setSelectedMonth }) => {
-  const handleSetMonth = (month) => {
-    setSelectedMonth(month);
-  };
-
-  return (
-    <ButtonWrapper>
-      {MONTHS.map((month, index) => (
-        <MonthButton
-          $active={selectedMonth === month}
-          onClick={() => {
-            handleSetMonth(month);
-          }}
-          key={index}
-        >
-          {month}월
-        </MonthButton>
-      ))}
-    </ButtonWrapper>
-  );
-};
 
 export default MonthSelect;

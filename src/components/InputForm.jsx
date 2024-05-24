@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
+import { SpendingContext } from "../context/SpendingContext";
 
-const InputForm = ({ addSpending, setSelectedMonth }) => {
+const InputForm = ({ addSpending }) => {
+  const { setSelectedMonth } = useContext(SpendingContext);
   const [date, setDate] = useState("");
   const [category, setCategory] = useState("");
   const [cost, setCost] = useState(0);

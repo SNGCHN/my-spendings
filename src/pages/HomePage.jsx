@@ -1,22 +1,20 @@
-import { useState } from "react";
+import { useContext } from "react";
 import InputForm from "../components/InputForm";
 import MonthSelect from "../components/MonthSelect";
 import SpendingItem from "../components/SpendingItem";
+import { SpendingContext } from "../context/SpendingContext";
 
-const HomePage = ({ spending, setSpending, selectedMonth, setSelectedMonth }) => {
+const HomePage = () => {
+  const { setSpending } = useContext(SpendingContext);
   const addSpending = (newSpending) => {
-    setSpending([...spending, newSpending]);
+    setSpending((prev) => [...prev, newSpending]);
   };
-  console.log(spending);
-  console.log(selectedMonth);
   return (
-    <>
-      <div className='container'>
-        <InputForm addSpending={addSpending} setSelectedMonth={setSelectedMonth} />
-        <MonthSelect selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
-        <SpendingItem spending={spending} selectedMonth={selectedMonth} />
-      </div>
-    </>
+    <div className='container'>
+      <InputForm addSpending={addSpending} />
+      <MonthSelect />
+      <SpendingItem />
+    </div>
   );
 };
 
