@@ -1,16 +1,14 @@
-import React, { useState } from "react";
-import InputForm from "./InputForm";
-import MonthSelect from "./MonthSelect";
-import SpendingItem from "./SpendingItem";
+import { useState } from "react";
+import InputForm from "../components/InputForm";
+import MonthSelect from "../components/MonthSelect";
+import SpendingItem from "../components/SpendingItem";
 
-const HomePage = () => {
-  const [spending, setSpending] = useState([]);
-
-  const [selectedMonth, setSelectedMonth] = useState(1);
-
+const HomePage = ({ spending, setSpending, selectedMonth, setSelectedMonth }) => {
   const addSpending = (newSpending) => {
     setSpending([...spending, newSpending]);
   };
+  console.log(spending);
+  console.log(selectedMonth);
   return (
     <>
       <div className='container'>

@@ -13,10 +13,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .container {
-    margin: 0 auto;
+    margin: 50px auto;
     width: 100%;
     max-width: 800px;
     padding: 20px;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 `;

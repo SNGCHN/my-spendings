@@ -34,7 +34,13 @@ const MonthSelect = ({ selectedMonth, setSelectedMonth }) => {
   return (
     <ButtonWrapper>
       {MONTHS.map((month, index) => (
-        <MonthButton $active={selectedMonth === month} onChange={() => handleSetMonth(month)} key={index}>
+        <MonthButton
+          $active={selectedMonth === month}
+          onClick={() => {
+            handleSetMonth(month);
+          }}
+          key={index}
+        >
           {month}월
         </MonthButton>
       ))}

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const SpendingItem = ({ spending, selectedMonth }) => {
@@ -7,15 +8,17 @@ const SpendingItem = ({ spending, selectedMonth }) => {
     <ListWrapper>
       {filteredSpend.map((item) => {
         return (
-          <ItemContainer key={item.id}>
-            <DatePrice>
-              <DateLabel>{item.date}</DateLabel>
-              <ItemName>
-                {item.category} - {item.detail}
-              </ItemName>
-            </DatePrice>
-            <ItemPrice>{item.cost}</ItemPrice>
-          </ItemContainer>
+          <Link to={`/detail/${item.id}`} key={item.id}>
+            <ItemContainer>
+              <DatePrice>
+                <DateLabel>{item.date}</DateLabel>
+                <ItemName>
+                  {item.category} - {item.detail}
+                </ItemName>
+              </DatePrice>
+              <ItemPrice>{item.cost}</ItemPrice>
+            </ItemContainer>
+          </Link>
         );
       })}
     </ListWrapper>
@@ -27,8 +30,11 @@ const ListWrapper = styled.div`
   padding: 20px;
   flex-direction: column;
   gap: 10px;
+  a {
+    text-decoration: none;
+  }
 `;
-const ItemContainer = styled.button`
+const ItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
