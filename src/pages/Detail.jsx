@@ -1,12 +1,12 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { useContext } from "react";
-import { SpendingContext } from "../context/SpendingContext";
+import { deleteSpending, editSpending, setMonth } from "../store/slices/spendingSlice";
 
 const Detail = () => {
-  const { spending, setSpending, setSelectedMonth } = useContext(SpendingContext);
-
+  const spending = useSelector((state) => state.spending.spending);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { detailId } = useParams();
   const selectedSpending = spending.find((item) => {
@@ -40,22 +40,12 @@ const Detail = () => {
       month: Number(editDate.split("-")[1]),
       detail: editDetail,
     };
-    setSpending((prev) => {
-      return prev.map((item) => {
-        if (item.id === detailId) {
-          return editItem;
-        }
-        return item;
-      });
-    });
-    setSelectedMonth(editItem.month);
+    dispatch(editSpending(editItem));
+    dispatch(setMonth(editItem.month));
     navigate("/");
   };
   const handleDeleteValue = () => {
-    const filteredItem = spending.filter((item) => {
-      return item.id !== detailId;
-    });
-    setSpending(filteredItem);
+    dispatch(deleteSpending(detailId));
     navigate("/");
   };
   const handleBack = () => {

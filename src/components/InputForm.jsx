@@ -1,10 +1,11 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
-import { SpendingContext } from "../context/SpendingContext";
+import { useDispatch } from "react-redux";
+import { addSpending, setMonth } from "../store/slices/spendingSlice";
 
-const InputForm = ({ addSpending }) => {
-  const { setSelectedMonth } = useContext(SpendingContext);
+const InputForm = () => {
+  const dispatch = useDispatch();
   const [date, setDate] = useState("");
   const [category, setCategory] = useState("");
   const [cost, setCost] = useState(0);
@@ -38,8 +39,8 @@ const InputForm = ({ addSpending }) => {
       detail,
     };
     console.log(month);
-    setSelectedMonth(month);
-    addSpending(newSpending);
+    dispatch(addSpending(newSpending));
+    dispatch(setMonth(month));
   };
 
   return (

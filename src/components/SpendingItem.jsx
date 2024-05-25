@@ -1,11 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useContext } from "react";
-import { SpendingContext } from "../context/SpendingContext";
 
 const SpendingItem = () => {
-  const { spending, selectedMonth } = useContext(SpendingContext);
+  const spending = useSelector((state) => {
+    return state.spending.spending;
+  });
+  const selectedMonth = useSelector((state) => {
+    return state.spending.month;
+  });
   const filteredSpend = spending.filter((item) => item.month === selectedMonth);
   return (
     <ListWrapper>
